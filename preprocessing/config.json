@@ -1,0 +1,17 @@
+{
+  "denoiseConfig": {
+    "msstRoot":   "../tools/Music-Source-Separation-Training",
+    "workenv":    "workenv",
+    "infer_py":   "inference.py",
+    "toolConfig": "configs/model_bs_roformer_ep_317_sdr_12.9755.yaml",
+    "modelCkpt":  "pretrain/model_bs_roformer_ep_317_sdr_12.9755.ckpt",
+    "modelType":  "bs_roformer"
+  },
+  "wavTokenizerConfig": {
+    "tknzrRoot":  "../tools/WavTokenizer",
+    "workenv":    "workenv",
+    "infer_py":   "inference.py",
+    "toolConfig": "configs/wavtokenizer_mediumdata_frame75_3s_nq1_code4096_dim512_kmeans200_attn.yaml",
+    "modelCkpt":  "pretrain/wavtokenizer_large_speech_320_24k.ckpt"
+  }
+}
