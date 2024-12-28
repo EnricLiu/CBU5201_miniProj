@@ -1,0 +1,6 @@
+[submodule "tools/Music-Source-Separation-Training"]
+	path = tools/Music-Source-Separation-Training
+	url = https://github.com/ZFTurbo/Music-Source-Separation-Training.git
+[submodule "tools/WavTokenizer"]
+	path = tools/WavTokenizer
+	url = https://github.com/EnricLiu/WavTokenizer
