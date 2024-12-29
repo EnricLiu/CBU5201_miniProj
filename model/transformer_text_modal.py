@@ -2,7 +2,7 @@ import math
 import torch
 import torch.nn as nn
 
-from encoding import PositionalEncoding, TransformerEncoder
+from .encoding import PositionalEncoding, TransformerEncoder
 
 class TextModalTransformerModel(nn.Module):
     def __init__(self, text_dim: int, d_model: int, nhead: int, num_layers: int, dim_feedforward: int, dropout: float, max_len: int=10000, output_method: str = 'cls', num_types: int=2):

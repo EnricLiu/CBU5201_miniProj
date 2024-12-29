@@ -2,4 +2,8 @@ train/ckpt
 
 datasets
 
-test
+*_test
+*_test.*
+
+preprocessing/out
+preprocessing/tmp

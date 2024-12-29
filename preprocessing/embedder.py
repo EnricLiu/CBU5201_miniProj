@@ -11,8 +11,8 @@ from torch import Tensor
 import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModel
 
-from wav_embed import wav_tknzr_embed
-from voice2text import read_srt
+from .wav_embed import wav_tknzr_embed
+from .voice2text import read_srt
 
 class Embedder:
     VOCAL_EMBED_DIR   = "vocal_embedded"

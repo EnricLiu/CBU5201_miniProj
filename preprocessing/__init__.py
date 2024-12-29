@@ -1,8 +1,8 @@
 import polars as pl
 from pathlib import Path
-from loudness_norm import loudness_norm
-from preprocessor import Preprocessor
-from embedder import Embedder
+from .loudness_norm import loudness_norm
+from .preprocessor import Preprocessor
+from .embedder import Embedder
 
 def preprocess(input: Path, output: Path, attr_df: pl.DataFrame, config: dict, tmp_path: Path):
     print("-------------------Preprocess-------------------")
@@ -12,11 +12,11 @@ def preprocess(input: Path, output: Path, attr_df: pl.DataFrame, config: dict, t
     del p
     print("-------------------Embedding--------------------")
     e = Embedder(config, tmp_path)
-    e.vocal_embed(vocal_out, output)
-    e.text_embed(text_out, attr_df, output)
+    vocal = e.vocal_embed(vocal_out, output)
+    text = e.text_embed(text_out, attr_df, output)
     e.destruct()
 
-    return
+    return vocal, text
 
 if __name__ == "__main__":
     import json

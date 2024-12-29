@@ -3,7 +3,7 @@ import subprocess
 import shutil
 
 def _read_config(tknzr_config:dict):
-    tknzr_root = Path(Path.cwd() / tknzr_config["tknzrRoot"])
+    tknzr_root = Path(__file__).resolve().parent / tknzr_config["tknzrRoot"]
     return {
         "python":       tknzr_root / tknzr_config["workenv"] / "python.exe",
         ".py":          tknzr_root / tknzr_config["infer_py"],
@@ -24,13 +24,20 @@ def wav_tknzr_embed(input: Path, output: Path, wav_tknzr_config: dict):
         input_folder = tmp_folder
 
     print("-------------------VocalEmbed-------------------")
-    subprocess.run([
+    # print(configs)
+    res = subprocess.run([
         configs["python"], configs[".py"],
         "--config_path",        str(configs["config"]),
         "--start_check_point",  str(configs["model_ckpt"]),
         "--input_folder",       str(input_folder),
         "--store_dir",          str(output),
-    ])
+    ], stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+
+    if res.returncode != 0:
+        print(res.stderr.decode("utf-8"))
+        raise RuntimeError("WavTokenizer failed")
+
+    print(res.stdout.decode("utf-8"))
 
     if input.is_file():
         shutil.rmtree(input_folder)

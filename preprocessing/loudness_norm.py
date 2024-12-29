@@ -7,6 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 def loudness_norm(audios: Path, output: Path,
                   out_fmt: str="wav", ac: int=1, ar: int=48000, max_workers: int=os.cpu_count()):
     def norm(audio: Path):
+        if audio.is_dir(): return None
         output.mkdir(parents=True, exist_ok=True)
         out_path = output.joinpath(audio.name)
         try:

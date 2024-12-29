@@ -6,9 +6,9 @@ import torch.cuda
 from tqdm import tqdm
 import polars as pl
 
-from loudness_norm import loudness_norm
-from msst_denoise import msst_denoise
-from voice2text import VTT, VttModelType
+from .loudness_norm import loudness_norm
+from .msst_denoise import msst_denoise
+from .voice2text import VTT, VttModelType
 
 class Preprocessor:
     RENAMED_DIR     = "renamed"
@@ -68,7 +68,7 @@ class Preprocessor:
         text_out_path =  out_path / self.TEXT_OUT_DIR
         stage = {"all":0, "norm":1, "denoise":2, "denoise_norm":3, "vtt":4}[stage]
         tasks = [
-            lambda a: loudness_norm(a, self._tmp_path / self.NORMALIZED_DIR, max_workers=max_workers),
+            lambda a: loudness_norm(a, self._tmp_path / self.NORMALIZED_DIR, ac=2, max_workers=max_workers),
             lambda a: msst_denoise(a, self._tmp_path / self.DENOISED_DIR, self.get_denoise_config()),
             lambda a: loudness_norm(a, vocal_out_path, max_workers=max_workers),
             lambda a: self.vtt(a, attr_df, text_out_path)
