@@ -1,9 +1,8 @@
 train/ckpt
 
-datasets
-
 *_test
 *_test.*
+.zip
 
 preprocessing/out
-preprocessing/tmp
+tmp
